@@ -1,0 +1,157 @@
+<div ng-if="!done">
+<center><img img width="250px" height="250px" src="img/loading.gif"/></center>
+</div>
+
+<div ng-if="done">
+<h2>PROJECT PROPOSAL FORM</h2>
+<hr>
+<p style="color:orange;"><strong>{{result}}</strong></p>
+<!-- User Story #1175 -->
+<form role="form" class="project_proposal"  ng-submit="save()" >
+    <div class="form-group">
+    <!-- User Story #1175 -->
+    <label>*Team Title</label>
+    <input type="text" class="form-control" placeholder="" ng-model="project.title" required/>
+    </div>
+
+<div class="form-group">
+    <!-- User Story #1175 -->
+    <label>*Semester:</label>
+	
+    <select ng-model="project.semester" ng-options="semester for semester in project.semesters" class="form-control" value="selectedTerm" required> <option></option>
+    </select>
+	
+</div>
+    
+
+    <div class="form-group" hidden>
+    <label>Team Image:</label>
+    <input type="url" class="form-control" ng-model="project.image"/>
+    </div>
+
+    <div class="form-group">
+    <label>Upload Team Image</label>
+    <input onchange="uploadImage2()" id="teamImage" accept=".jpg,.png,.gif" type="file" class="form-control" />
+    <progress id="pI" class="form-control" style="visibility: hidden; width: 20%; border: none;"/>
+    <small><i>Picture size MUST be below 2MB</i></small>
+    </div>
+
+    <div class="form-group">
+    <label>Video Link</label>
+    <input type="text" ng-model="project.video_url" class="form-control"/>
+    <small><i>It is recommended you put an intro video as the first video of a Youtube playlist for easier viewing</i></small>
+    </div>
+
+    <!-- <button type="button" data-toggle="collapse" data-target="#vids" class="btn btn-primary">Add a secondary video</button> -->
+    <div class="form-group" id="vids">
+    <label>Link to your YouTube page</label>
+    <input type="text" ng-model="project.youtube_url" class="form-control"/>
+    </div>
+    <!-- User Story #1142-->
+    <div class="form-group">
+    <!-- User Story #1175 -->
+    <label>*Team Description:</label>
+    <!-- <div text-angular ng-model="project.description"></div> -->
+    <!--<textarea ng-model="project.description" name="" class="form-control" rows="10">    
+    </textarea>-->
+    <trix-editor angular-trix  ng-model="project.description" name="" rows="10" required> </trix-editor>
+    </div>
+
+    <button type="button" data-toggle="collapse" data-target="#owner" class="btn btn-primary">Add a different product owner</button>
+    <div class="form-group collapse" id="owner">
+    <label>Product Owner (if left blank it will place you as product owner)</label>
+    <input type="text" class="form-control" placeholder="" ng-model="project.owner_name"/>
+    <label>Email of Product Owner (if product owner not blank an email must be provided)</label>
+    <input type="text" class="form-control" placeholder="" ng-model="project.owner_email"/>
+    </div>
+
+    <button type="button" data-toggle="collapse" data-target="#faculty" class="btn btn-primary">Add faculty members</button>
+    <div class="form-group collapse" id="faculty">
+    <label>Add a Faculty Member</label><br>
+    Name:  <input type="text" class="form-control" ng-model="SelectedFacultyNames" placeholder="Michael Smith, Johnny Stuart, Daniel Riveron" value="{{updateFacultyNames(SelectedFacultyNames)}}" />
+    Email:  <input type="text" class="form-control" ng-model="SelectedFacultyEmails" placeholder="michael@fiu.edu, johnny@yahoo.com, daniel@gmail.com" value="{{updateFacultyEmails(SelectedFacultyEmails)}}" />
+    <small><i>Note: Separate each with commas followed by one space!</i></small>
+    </div>
+
+    <button type="button" data-toggle="collapse" data-target="#mentor" class="btn btn-primary">Add mentors</button>
+    <div class="form-group collapse" id="mentor">
+    <label>Add a Mentor</label><br>
+    Name:  <input type="text" class="form-control" ng-model="SelectedMentorNames" placeholder="Michael Smith, Johnny Stuart, Daniel Riveron" value="{{updateMentorNames(SelectedMentorNames)}}" />
+    Email:  <input type="text" class="form-control" ng-model="SelectedMentorEmails" placeholder="michael@fiu.edu, johnny@yahoo.com, daniel@gmail.com" value="{{updateMentorEmails(SelectedMentorEmails)}}" />
+    <small><i>Note: Separate each with commas followed by one space!</i></small>
+    </div>
+
+    <button type="button" data-toggle="collapse" data-target="#student" class="btn btn-primary">Add students manually</button>
+    <div class="form-group collapse" id="student">
+    <label>Add Students</label><br>
+    Name:  <input type="text" class="form-control" ng-model="SelectedStudentNames" placeholder="Michael Smith, Johnny Stuart, Daniel Riveron" value="{{updateStudentNames(SelectedStudentNames)}}" />
+    Email:  <input type="text" class="form-control" ng-model="SelectedStudentEmails" placeholder="michael@fiu.edu, johnny@yahoo.com, daniel@gmail.com" value="{{updateStudentEmails(SelectedStudentEmails)}}" />
+    <small><i>Note: Separate each with commas followed by one space!</i></small>
+    </div>
+
+    <div class="form-group">
+    <label>Github link</label>
+    <input type="text" ng-model="project.github_url"  class="form-control"/>
+    </div>
+
+    <div class="form-group">
+    <label>Google Drive link</label>
+    <input type="text" ng-model="project.drive_url" class="form-control" />
+    </div>
+
+    <div class="form-group">
+    <label>Mingle link</label>
+    <input type="text" ng-model="project.mingle_url" class="form-control" />
+    </div>
+
+	<div class="form-group">
+    <label>Link to Previous Semester's Project</label>
+    <input type="text" ng-model="project.archive_url" class="form-control" />
+    </div>
+	
+    <div class="form-group">
+    <label>Minimum number of students:</label>
+    <input type="number" min="0" class="form-control" placeholder="" ng-model="project.firstSemester"/>
+    </div>
+
+    <div class="form-group">
+    <label>Maximum number of students per semester:</label>
+    <input type="number" min="0" class="form-control" placeholder="" ng-model="project.maxStudents"/>
+    </div>
+    <!-- User Story #1144 -->
+    <div class="form-group">
+    <!-- User Story #1175 -->
+    <label>*Required Skills and Knowledge:</label>
+    <input type="text" class="form-control" placeholder="" ng-model="project.reqskillItem" required/>
+    </div>
+
+    <!-- User Story #1207 -->
+    <div class="form-group" hidden>
+    <label>Proposed Date:</label>
+     <input class="form-control" placeholder="" ng-model="project.proposedDate"/>
+    </div>
+
+    <h4><strong>* : required fields</strong></h4>
+    <br>
+     <!-- User Story #1191 -->   
+    <p><h5>Hover and click to select the options</h5></p>
+<div ng-repeat = 'college in colleges' class="dropdown" >
+<div>
+<button ui-sref="" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="display: inline-block;">
+{{college['name']}}</button>
+</div>
+<ul class="dropdown-menu" style="background-color:white;list-syle-type:none;">
+<li ng-repeat = '(key2, value2) in college["schools"]' class="dropdown-submenu" style="background-color:white;">
+&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" ng-click="toggleCheckbox(value2)">{{value2}}  
+</li>
+</ul>
+</div>
+    <br/>
+    <br/>
+<!-- User Story #1175 -->
+    <input type="submit" class="btn btn-primary submit-btn"></input>
+    <br/>
+    <br/>
+
+</form>
+</div>

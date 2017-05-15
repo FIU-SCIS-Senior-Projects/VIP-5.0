@@ -1,0 +1,79 @@
+<!-- User Story #1140-->
+<div>
+ <h3 align="center"> Review Faculty Registrations </h3>
+            <table class="table">
+            <tr>
+            <td><label>Date</label></td><td><label>First Name</label></td><td><label>Last Name</label></td><td><label>Email</label></td><td><label>User Type</label></td><td><label>Rank</label></td>
+            <td><label>Panther ID</label></td><td><label>Gender</label></td><td><label>College</label></td><td><label>School/Department</label></td><td><label>Approve</label></td><td><label>Reject</label></td>
+            </tr>
+            <tr ng-repeat="user in vm.membs track by $index">
+            
+            <td><a data-toggle="tooltip" data-placement="top" title={{user.RegDate}}><input type="text" class="form-control profile" value={{user.RegDate}} readonly></input></a></td>
+            <td><a data-toggle="tooltip" data-placement="top" title={{user.firstName}}><input type="text" class="form-control profile" value={{user.firstName}} readonly></input></a></td>
+            <td><a data-toggle="tooltip" data-placement="top" title={{user.lastName}}><input type="text" class="form-control profile" value={{user.lastName}} readonly></input></a></td>
+            <td><a data-toggle="tooltip" data-placement="top" title={{user.email}}><input type="text" class="form-control profile" value={{user.email}} readonly></input></a></td>
+            <td><a data-toggle="tooltip" data-placement="top" title={{user.userType}}><input type="text" class="form-control profile" value={{user.userType}} readonly></input></a></td>
+            <td><a data-toggle="tooltip" data-placement="top" title={{user.rank}}><input type="text" class="form-control profile" value={{user.rank}} readonly></input></a></td>
+            <td><a data-toggle="tooltip" data-placement="top" title={{user.pantherID}}><input type="text" class="form-control profile" value={{user.pantherID}} readonly></input></a></td>
+            <td><a data-toggle="tooltip" data-placement="top" title={{user.gender}}><input type="text" class="form-control profile" value={{user.gender}} readonly></input></a></td>
+            <td><a data-toggle="tooltip" data-placement="top" title={{user.college}}><input type="text" class="form-control profile" value={{user.college}} readonly></input></a></td>
+            <td><a data-toggle="tooltip" data-placement="top" title={{user.department}}><input type="text" class="form-control profile" value={{user.department}} readonly></input></a></td>
+
+            <td>
+            <div class="text-center">
+                <button style= "width: 50px;" class="btn btn-success btn-block" ng-click="vm.acceptProfile(user)">
+                    <i></i> Yes
+                </button>
+                </div>
+            </td>
+            <td>
+            <div class="text-center">
+                <button style= "width: 50px;" class="btn btn-danger btn-block" ng-click="vm.rejectProfile(user)">
+                    <i></i> No
+                </button>
+            </td>
+            </tr>
+            </div>
+            
+            </div>
+<br>
+</table>
+<h3 align="center"> Review Faculty Applications History</h3>
+<table class="table">
+            <tr>
+             <td><label>Date</label></td><td><label>First Name</label></td><td><label>Last Name</label></td><td><label>Email</label></td><td><label>Type</label></td><td><label>Rank</label></td>
+            <td><label>Gender</label></td><td><label>College</label></td><td><label>Department</label></td><td><label>Action</label></td><td><label>Undo</label></td><td><label>Delete</label></td>
+            </tr>
+            <tr ng-repeat="log in vm.logs | filter:{ type: 'faculty' }">
+            <td><a data-toggle="tooltip" data-placement="top" title={{log.RegDate}}><input type="text" class="form-control profile" value={{log.RegDate}} readonly></input></a></td>  
+            <td><a data-toggle="tooltip" data-placement="top" title={{log.firstName}}><input type="text" class="form-control profile" value={{log.firstName}} readonly></input></a></td>
+            <td><a data-toggle="tooltip" data-placement="top" title={{log.lastName}}><input type="text" class="form-control profile" value={{log.lastName}} readonly></input></a></td>
+            <td><a data-toggle="tooltip" data-placement="top" title={{log.facultyemail}}><input type="text" class="form-control profile" value={{log.facultyemail}} readonly></input></a></td>
+            <td><a data-toggle="tooltip" data-placement="top" title={{log.type}}><input type="text" class="form-control profile" value={{log.type}} readonly></input></a></td>
+            <td><a data-toggle="tooltip" data-placement="top" title={{log.rank}}><input type="text" class="form-control profile" value={{log.rank}} readonly></input></a></td>
+            <td><a data-toggle="tooltip" data-placement="top" title={{log.gender}}><input type="text" class="form-control profile" value={{log.gender}} readonly></input></a></td>
+            <td><a data-toggle="tooltip" data-placement="top" title={{log.college}}><input type="text" class="form-control profile" value={{log.college}} readonly></input></a></td>
+            <td><a data-toggle="tooltip" data-placement="top" title={{log.department}}><input type="text" class="form-control profile" value={{log.department}} readonly></input></a></td>
+            <td><input type="text" class="form-control log" value={{log.action}} readonly></input></td>
+            <td>
+            <div class="text-center">
+                <button style= "width: 75px;" class="btn btn-danger btn-block" ng-click="vm.UndoFaculty(log)">
+                    <i></i> Undo
+                </button>
+                </div>
+            </td>
+            <td>
+            <div class="text-center">
+                <button style= "width: 75px;" class="btn btn-danger btn-block" ng-click="vm.deleteLog(log)">
+                    <i></i> Delete
+                </button>
+                </div>
+            </td>
+            </tr>
+            </div>
+            
+            </div>
+<br>
+</table>
+
+</div>

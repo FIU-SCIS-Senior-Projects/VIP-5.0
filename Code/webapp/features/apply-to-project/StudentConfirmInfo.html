@@ -1,0 +1,179 @@
+<div>
+<div ng-if="!done">
+<center><img img width="250px" height="250px" src="img/loading.gif"/></center>
+</div>
+<div ng-if="done" class=register>
+<h3 align="center"> Confirm Information </h3>
+<form name="ProjectApplication" ng-disabled="ProjectApplication.$invalid" ng-submit="projApp.save()">
+<div class="form-group">
+<table class="table">
+<tr>
+<td colspan="4">
+<!-- User Story #1175 -->
+<label>*Project (Please check the <a href="#/vip-projects">"PROJECTS"</a> page for more information):</label>
+<select ng-model="projApp.sProject" ng-options="project as project.title for project in projApp.projects | filter: project.status = 'Active'" class="form-control" required>
+</select>
+</td>
+</tr>
+<tr>
+<td colspan="4">
+<!-- User Story #1175 -->
+<label>*Semester:</label>
+<select  ng-model="projApp.semester" ng-options="semester for semester in projApp.semesters" class="form-control" required>
+</select>
+</td>
+</tr>
+<tr ng-if="projApp.type != 'Student'">
+<td colspan="4">
+<!-- User Story #1175 -->
+<label>*Join As:</label>
+<select  ng-model="projApp.join_type" class="form-control" required>
+<option></option>	
+<option>Faculty</option>
+<option>Mentor</option>
+</select>
+</td>
+</tr>
+<tr ng-hide="guest">
+<td>
+<input type="text" ng-model="projApp.firstName" class="form-control" Required="True" ng-readonly="true">
+
+</td>
+<td>
+<input  type="text" ng-model="projApp.lastName" class="form-control" Required="True" ng-readonly="true">
+</td>
+</tr>
+<tr ng-hide="guest">
+<td colspan="4">
+<input type="text" ng-model="projApp.email" class="form-control" Required="True" ng-readonly="true">
+</td>
+</tr>
+<tr ng-hide="guest">
+<td>
+<label>User Type:</label>
+<div>
+<input class = 'form-control' ng-model="projApp.type" ng-readonly="true">
+</div><br>
+
+</td>
+
+<td >
+<label>*Rank:</label>
+<div>
+<!--Sprint#5 part3-->
+<select ng-model="projApp.selectedRank" ng-options="rank.name as rank.name for rank in projApp.ranks | filter:rank.rank=projApp.type" class="form-control" required>
+<option></option></select>
+
+</div>
+<!--   <input class="form-control" ng-model="projApp.rank" ng-readonly="false">   -->
+
+</td>
+<tr ng-hide="guest">
+<td>
+<!-- User Story #1175 -->
+<label>*Panther ID:</label>
+
+<div>
+<input type="text" ng-model="projApp.pID" class="form-control" ng-readonly="false" required>
+</div>
+
+</td>
+<td>
+<!-- User Story #1175 -->
+<label>*Gender:</label>
+<div>
+<select ng-model="projApp.gender" ng-options="gender for gender in projApp.genders" class="form-control" required></select>
+</div>
+</td>
+
+<tr ng-if="projApp.type == 'Student'">
+<td colspan="4">
+<label>*Please select one of the options:</label>
+<select ng-change="optionselected()" ng-model="projApp.branch" class="form-control"  required><option></option>
+<option value="1">VIP Credit </option>
+<option value="2">Volunteer </option>
+<option value="3">Independent Study </option>
+</select>
+</td>
+</tr>
+
+<tr ng-if="projApp.branch == '1'">
+<td colspan="4">
+<label>*Please select one of the options:</label>
+<select class="form-control" ng-model="projApp.vipcredit" required>
+<option></option>
+<option value="IDS 2947">1 Credit [IDS 2947] </option>
+<option value="IDS 3948">2 Credit [IDS 3948] </option>
+<option value="IDS 4993">3 Credit [IDS 4993] </option>
+<!--Sprint#5 part3-->	
+<option value="IDS 5993">Graduate [IDS 5993] </option>
+</select>
+</td>
+</tr>
+
+<tr ng-if="projApp.branch == '3'">
+<td colspan="4">
+<label>*Name of the Instructor</label>
+<input type="text" class="form-control" ng-model="projApp.independentstudy" required/>
+</td>
+</tr>
+
+
+
+
+
+<tr ng-hide="guest">
+<td colspan="4">
+<!-- User Story #1175 -->
+<label>*College:</label>
+<select ng-model="projApp.selectedCollege" ng-options="college as college.name for college in projApp.Colleges" class="form-control">
+</select>
+</td>
+</tr>
+<tr ng-hide="guest">
+<td colspan="4">
+
+<label>School/Department:</label>
+<select ng-model="projApp.school" ng-options="school for school in projApp.selectedCollege.schools" class="form-control">
+</select>
+
+</td>
+</tr>
+
+</tr>
+<!-- User Story #1144 -->
+<tr ng-hide="guest">
+<td colspan="4">
+
+<label>*Skills and Experience:</label>
+<div>
+<input type="text" ng-model="projApp.skillItem" class="form-control"  ng-readonly="false" required/>
+</div>
+
+</td>
+</tr>
+
+</table>
+
+<!-- <div class="row show-hide-message" ng-show="projApp.message">
+{{ projApp.message }}
+</div> -->
+ <h4><strong>* : required fields</strong></h4>
+ <br>
+<div align="center">
+<input style= "width: 150px;" type="submit" class="btn btn-primary btn-block submit-app" >
+</input>
+
+</div>
+<br>
+
+<div>
+<!-- <a ui-sref ="projects" class="pull-right">Cancel Application</a><br> -->
+<a ng-href="{{getLinkUrl()}}">Cancel Application</a>
+</div>
+
+
+</div>
+
+</form>
+</div>

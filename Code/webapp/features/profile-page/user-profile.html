@@ -1,0 +1,163 @@
+<div class="register">
+	<h3 align="center"> User Profile </h3>
+	<form name="Profile">
+		<div style = "text-align: center;">
+			<img src = "img/user_icon.png" ng-src="{{vm.profile.image}}" alt="Profile Picture" height="120" width="120" >
+		</div>
+
+		<div class="form-group">
+			<table class="table">
+				<tr>
+					<td>
+						<input type="text" placeholder="First Name" ng-model="vm.profile.firstName" class="form-control" >
+
+					</td>
+					<td>
+						<input  type="text"  placeholder="Last Name" ng-model="vm.profile.lastName" class="form-control" >
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<input type="text" placeholder="Email" ng-model="vm.profile.email" class="form-control" >
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>User Type:</label>
+						<div>
+							<select class = 'form-control' ng-model="vm.profile.userType" ng-options="user as user for user in vm.users">
+							</select>
+						</div><br>
+
+					</td>
+					<td>
+						<label>Rank:</label>
+						<div>
+							<select class = 'form-control' ng-model="vm.profile.rank" ng-options="rank.name as rank.name for rank in vm.ranks | filter:rank.rank=vm.profile.userType">
+							</select>
+						</div>
+				</tr>
+				<tr>
+					<td>
+						<label>Panther ID:</label>
+
+						<div>
+							<input type="text" ng-model="vm.profile.pantherID" class="form-control" />
+						</div>
+
+					</td>
+					<td>
+
+						<label>Gender:</label>
+						<div>
+							<select  ng-model="vm.profile.gender" class="form-control" ng-options=" sex for sex in vm.genders">
+						</div>
+					</td>
+				<tr>
+					<td colspan="4">
+
+						<label>College:</label>
+							<select  ng-model="vm.profile.college" class="form-control"  ng-options="college.name as college.name for college in vm.Colleges" >
+							</select>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+
+						<label>School/Department:</label>
+							<select  ng-model="vm.profile.department" ng-options="school for school in vm.selectedCollege.schools" class="form-control">
+                            
+                            
+						</input>
+
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<label>Major:</label>
+						<div>
+							<select class = 'form-control' ng-model="vm.profile.major" ng-options=" major for major in vm.majors" >
+							</select>
+						</div>
+
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<label>Minor:</label>
+						<div>
+							<input class = 'form-control' ng-model="vm.profile.minor" >
+							
+						</div>
+
+					</td>
+				</tr>
+				<!-- User Story #1144 -->
+				<tr>
+					<td colspan="4">
+						<label>Skill Item:</label>
+						<div>
+							<input class = 'form-control' ng-model="vm.profile.skillItem" >
+							
+						</div>
+
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<div class="flow-control">
+						<label for="">Upload a Profile Photo</label>
+							<input onchange="uploadImage()" id="profileImage" accept=".jpg,.png,.gif" type="file" class="form-control" />
+							<br><progress id="pI" class="form-control" style="visibility: hidden;"/>
+							<small><i>Image must be .jpg, .png or .gif</i></small>
+							<small><i>If you are logged in with Gmail it will use the Gmail photo only</i></small>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<div class="form-group">
+							<label>Upload Resume</label>
+							<input onchange="uploadResume()" ng-model="vm.profileResume" id="profileResume" accept=".pdf" type="file" class="form-control" id="teamImage"/>
+							<br><progress id="pR" class="form-control"  style="visibility: hidden;"/>
+							<small><i>Resume must be uploaded in PDF format and under 16MB</i></small>
+						</div>
+					</td>
+				</tr>
+				<tr ng-if="vm.profile.resume">
+					<td colspan="4">
+						<label data-toggle="collapse" data-target="#resume">Resume (Click To View)</label>
+						<object id="resume" class="collapse" height="500px" width="100%" data="{{vm.profile.resume}}" type="application/pdf" />
+
+					</td>
+				</tr>
+				<tr ng-if="!vm.profile.resume">
+					<td colspan="4">
+						<label>Resume:</label>
+						<span>No Resume On File</span>
+					</td>
+				</tr>
+			</table>
+
+				<div align="center">
+					<button style= "letter-spacing: 3px; max-width: 300px; background-color: #081E3F; border: none; font-weight: bold;" type="submit" class="btn btn-primary btn-block" ng-disabled="vm.profile.$invalid" ng-click="vm.updateProfile()">
+						 UPDATE
+					</button>
+				</div>
+			
+				<button style= "max-width:150px; margin-top: 20px; border: none;" type="submit" class="btn btn-danger" ng-disabled="vm.profile.$invalid" ng-click="vm.destroyAccount()">
+					 Delete Account
+				</button>
+
+<!-- 
+				<button style= "max-width: 300px; margin-top: 20px; float:right; background-color: #081E3F; border: none;" type="submit" class="btn btn-primary" ng-disabled="vm.profile.$invalid">
+					 Upload Resume
+				</button> -->
+			
+				</div>
+			</div>
+			<br>
+		</div>
+	</form>
+</div>

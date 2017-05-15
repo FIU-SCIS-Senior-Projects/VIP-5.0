@@ -1,0 +1,292 @@
+
+<html>
+
+<head>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+<link rel="stylesheet" href="https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.1-master-a687bfc/angular-material.css">
+<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-blue.min.css">
+<link rel="stylesheet" type="text/css" href="adminpanel.css">
+</head>
+
+
+	
+
+
+<div style="width:100%;">   
+
+
+<div>
+<div class="panel panel-default" style="width:100%;overflow:scroll;">
+		<nav >
+		<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" style="color:#333333;">Admin Panel</a>
+		</div>
+		<ul class="nav navbar-nav navbar-right">
+		<li><button style="float:right;" ng-click="vm.uncheck()" ng-model="refresh" class="btn second-button btn-default navbar-btn">
+		<span class="glyphicon glyphicon-refresh"></span>Refresh Filters
+		</button></li>
+		<li>
+		&nbsp;<button style="float:right;" ng-click="section1=!section1" class="btn second-button btn-default navbar-btn">
+		<span class="glyphicon glyphicon-filter"></span>Filters
+		</button>
+		</li>
+		<li>
+		&nbsp;<button style="float:right;" ng-click="vm.exportData()" class="btn second-button btn-default navbar-btn">
+		<span><img style="width:20px;height:18px;" src="img/Excel-icon.png"></span>Excel
+		</button>
+		</li>
+		</ul>
+		</div>
+		</nav>
+
+
+
+		<section id="section1" ng-show="section1">
+		<table class="table table-striped table-bordered">
+		<thead style="background-color:#F2F3F4;">
+		<tr>
+		<td class="col-md-4">
+		<input type="checkbox" ng-model="usertype">UserType:
+		<select class="form-control" id="susertype" ng-model="selectedusertype" ng-options="typerank as typerank.name for typerank in vm.typeranks" value="{{vm.getRank(selectedusertype)}}"></select>
+		</td>
+		<td class="col-md-4">
+		<input type="checkbox" ng-model="userrank">UserRank:
+		<select class="form-control" ng-model="selecteduserrank" ng-options="rank for rank in vm.filteredrank"></select></input>
+		</td>
+		<td class="col-md-4">
+		<input type="checkbox" ng-model="userproject">Project:
+		<select class="form-control" ng-model="selecteduserproject" ng-options="projects as projects.title for projects in vm.projects" value="{{vm.getStudents(SelectedProject)}}"></select>
+		</td>
+		</tr>
+		<br/>
+		<tr>
+		<td class="col-md-3"><input type="checkbox" ng-model="piApproval">Unconfirmed Email</input></td>
+		<td class="col-md-3"><input type="checkbox" ng-model="google">Gmail Login</input></td>
+		<td class="col-md-3"><input type="checkbox" ng-model="mentor">Mentor</input>
+		<input type="checkbox" ng-model="multipleproject">Multiple Projects</input> </td>
+		</tr>
+		</tbody>
+		</table>
+		</section>
+
+
+		<table class="table table-striped table-bordered">
+		<thead style="background-color:#ABB2B9;">
+		<tr>
+		<td>First Name<input class="form-control" type="text" ng-model="query1"/></td>
+		<td>Last Name<input type="text"class="form-control"  ng-model="query2"/></td>
+		<td>Email<input type="text" class="form-control"  ng-model="query3"/></td>
+		<td>Panther ID<input type="text" class="form-control"  ng-model="query4"/></td>
+		<td>User Type<input type="text" class="form-control"  ng-model="query5"/></td>
+		<td>College<input type="text" class="form-control" ng-model="query6"/></td>
+		<td>Project<input type="text" class="form-control"  ng-model="query7"/></td>
+		<td>Gender<input type="text" class="form-control"  ng-model="query8"/></td>
+		<td>Joined Project<input type="text" class="form-control"  ng-model="query9"/></td>
+		<td>Rank<input type="text" class="form-control" ng-model="query10"/></td>
+		<td>Mentor<input type="text" class="form-control" ng-model="query11"/></td>
+		<td>PiApproval<input type="text" class="form-control" ng-model="query12"/></td>
+		<td>Multiple Project<input type="text" class="form-control" ng-model="query13"/></td>
+		<td>Project Application_Date<input type="text" class="form-control" ng-model="query14"/></td>
+		<td>User Registration_Date<input type="text" class="form-control" ng-model="query15"/></td>
+		<td>First Login_Date<input type="text" class="form-control" ng-model="query16"/></td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr  ng-repeat="user in (filteredItems = ( vm.tabledata | filter:query1| filter:query2| filter:query3| filter:query4| filter:query5| filter:query6| filter:query7| filter:query8| filter:query9| filter:query10 | filter:query11 | filter:query12 | filter:query13 | filter: usertype? selectedusertype.name:'' | filter: userrank? selecteduserrank:'' | filter: userproject? selecteduserproject.title:'' | filter: google? google:'' | filter: mentor? mentor:'' | filter: multipleproject? multipleproject:'' | filter: piApproval? piApproval:'' | filter:query14 | filter:query15 | filter:query16 ))">
+		<td>{{user.firstName}} </td>
+		<td>{{user.lastName}} </td>  
+		<td>{{user.email}} </td> 
+		<td>{{user.pantherID}} </td> 
+		<td>{{user.userType}} </td> 
+		<td>{{user.college}} </td>  
+		<td>{{user.project}} </td> 
+		<td>{{user.gender}} </td> 
+		<td>{{user.joined_project}} </td> 
+		<td>{{user.rank}} </td> 
+		<td>{{user.mentor}} </td> 
+		<td>{{user.piApproval}} </td> 
+		<td>{{user.multipleproject}}</td>
+		<td>{{user.appliedDate}}</td>
+		<td>{{user.RegDate}}</td>
+		<td>{{user.firstlogin_date}}</td>
+		</tr>
+		</tbody>
+		</table>
+</div>
+</div>
+
+
+<!-- .................................................... -->
+<div class="row"> 
+	<div class="col-md-12 panel panel-default">
+		<h3 align="center"> Unconfirmed Users (For Dev Only)</h3>
+			<div class="form-group">
+				<table class="table">
+				<tr>
+				<select class="form-control" ng-model="Selecteduserconfirm" ng-options="user as '['+user.userType+'] '+user.firstName + ' ' + user.lastName for user in vm.filteredusers" value="{{vm.userinUnconfirmedfunc(Selecteduserconfirm)}}"></select>
+				</tr>
+				<tr>
+				<th>
+				<button style= "width: 80px;" class="btn btn-success btn-block" ng-click="vm.ConfirmUser()">Confirm</button>
+				</th>
+				<th>
+				<button style= "width: 80px;" class="btn btn-danger btn-block" ng-click="vm.RejectUser()">Delete</button>
+				</th>
+				</tr>
+				</table>
+		</div>
+	</div>
+</div>
+
+
+<!-- .................................................... -->
+
+<div class="row">
+	<div class="col-md-6 panel panel-default">
+		<h3 align="center"> Change UserType </h3>
+		<div class="form-group">
+			<table class="table">
+				<tr>
+				<th>
+				<b>User:</b> <select  class="form-control" ng-model="Selecteduser" ng-options="user as '['+user.userType+'] '+user.firstName + ' ' + user.lastName for user in vm.filteredusers"  value="{{vm.userChange(Selecteduser)}}"></select>
+				</th>
+				</tr>
+				<tr>
+				<th>
+				<b>change usertype to: </b>
+				</th>
+				</tr>
+				<tr>
+				<th>
+				<select  class="form-control" ng-model="Selectedusertype" ng-options="usertype for usertype in vm.usertype" value="{{vm.userTypeChange(Selectedusertype)}}"></select>
+				</th>
+				</tr>
+				</table>
+				<table class="table" style="height: 1px;">
+				<tr>
+				<th>
+				<button style="width: 80px;" class="btn btn-success btn-block" ng-click="vm.changeUserType()">Change</button>
+				</th>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+
+	<div class="col-md-6 panel panel-default">
+		<h3 align="center"> Change User's Project </h3>
+		<div class="form-group">
+			<table class="table">
+				<tr>
+				<th>
+				<b>User:</b> <select  class="form-control" ng-model="selectedProjectMember" ng-options="user as '['+user.userType+'] '+user.firstName + ' ' + user.lastName + ' ' + '(' + vm.getProjectTitle(user.email) + ')' for user in vm.filteredusers" value="{{vm.currentUser(selectedProjectMember)}}" ></select>
+				</th>
+				</tr>
+				<tr>
+				<th>
+				<b>change user's project to:  </b>
+				</th>
+				</tr>
+				<tr>
+				<th>
+				<select  class="form-control" ng-model="selectedProject" ng-options="projects as projects.title for projects in vm.projects" value="{{vm.currentProject(selectedProject)}}"></select>
+				</th>
+				</tr>
+				</table>
+				<table class="table" style="height: 1px;">
+				<tr>
+				<th>
+				<button style= "width: 80px;" ng-click="vm.sw()" class="btn btn-success btn-block">Change</button>
+				</th>
+				<th>
+				<button style= "width: 80px;" ng-click="vm.sc()" class="btn btn-success btn-danger">Clear</button>
+				</th>
+				</tr>
+			</table>
+		</div>
+	</div>	
+</div>
+
+
+
+<!-- .................................................... -->
+	 <!--Joe's User Story -->
+<div class="row">
+	<div class="col-md-6 panel panel-default">
+		<h3 align="center"> Lock/Unlock Projects </h3>
+		<div class="form-group">
+			<table class="table">
+				<tr>
+				<th>
+				<b>Project:</b> <select  class="form-control" ng-model="selectedProject" ng-options="projects as projects.title for projects in vm.projects" value="{{vm.currentProject(selectedProject)}}"></select>
+				</th>
+				</tr>
+				<tr>
+				<th>
+				<b>change Project's status to:  </b>
+				</th>
+				</tr>
+				<tr>
+				<th>
+				<select  class="form-control" ng-model="selectedStatus" ng-options="projects as projects for projects in vm.status" ></select>
+				</th>
+				</tr>
+				</table>
+				<table class="table" style="height: 1px;">
+				<tr>
+				<th>
+				<button style= "width: 80px;" ng-click="vm.se()" class="btn btn-success btn-block">Change</button>
+				</th>
+				<th>
+				</th>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="col-md-6 panel panel-default">
+		<h3 align="center"> Lock/Unlock Semester </h3>
+		<div class="form-group">
+			<table class="table">
+				<tr>
+				<th>
+				<b>Term:</b> <select  class="form-control" ng-model="selectedTerm" ng-options="terms as terms.name for terms in vm.terms" value="{{vm.currentTerm(selectedTerm)}}" ></select>
+				</th>
+				</tr>
+				<tr>
+				<th>
+				<b>change Semester's status to:  </b>
+				</th>
+				</tr>
+				<tr>
+				<th>
+				<select  class="form-control" ng-model="selectedTermStatus" ng-options="terms as terms for terms in vm.active" value="{{vm.currentTerm(selectedTerm)}}"></select>
+				</th>
+				</tr>
+				</table>
+				<table class="table" style="height: 1px;">
+				<tr>
+				<th>
+				<button style= "width: 80px;" ng-click="vm.nw()" class="btn btn-success btn-block">Change</button>
+				</th>
+				<th>
+				</th>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>	<!--
+		This button is to add new terms to the terms collection in Mongo, leave commented out unless you are planning to add a new collection	
+		Take Note, this button allows duplicates, so be careful, or you'll have to manually remove duplicate terms from the db 
+				<button  ng-click="vm.AddTerms()">Add Terms</button>
+				-->
+
+
+</div>
+			
+
+
+
+</html>

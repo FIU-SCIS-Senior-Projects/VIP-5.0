@@ -1,0 +1,149 @@
+<div class="row team-project">
+
+        <div class="video-container" ng-show="vm.data.video_url">
+			
+            <iframe width="600" height="350" ng-src="{{vm.setVideo(vm.data.video_url)}}"  frameborder="0" allowfullscreen style="margin: 0 auto;"></iframe>
+        </div>
+
+        <div class="col-sm-9 project-second-section-middle">
+            <div class="col-sm-12 detailed-project-info">
+				<center>
+					<h2 class="proj-status" ng-hide="(vm.data.status == 'Active')">
+						
+                        <strong>This Project is Currently Inactive</strong>
+                    </h2>
+				</center>
+                    <h2 class="proj-title-teams">
+						
+						
+                        <strong>{{vm.data.title}}</strong>
+                    </h2>
+                    <hr>
+                    <!-- User Story #1142-->
+                    <!-- <img src="{{vm.data.image}}" class="proj-image" /> -->
+                    <h4>About this project</h4>
+                    <!--<p class="proj-description"> {{vm.data.description}} </p> -->
+                    <pre class="proj-description"  style="border:white;background-color:#FFFFFF;white-space:pre-line">
+                        <img src="{{vm.data.image}}" class="proj-image" />
+                        <div ng-bind-html="vm.data.description"></div>
+                    </pre>
+					 <!-- User Story #1144 -->
+                    <p>
+                        <label>Skills required:</label>
+                        {{vm.data.reqskillItem}}
+                    </p>
+					<p>
+                        <label>Semester:</label>
+                        {{vm.data.semester}}
+                    </p>
+            </div>
+        </div>
+
+        <div class="col-md-3 sidebar-container">
+            <div class="col-md-12">
+            <h4>Discover More</h4>
+			<!-- User Story 1160 -->
+			<a href="{{vm.data.github_url}}" ng-hide="!(vm.data.github_url)" title="Github">
+			<i class="fa fa-github social-icon" style="margin-left: 10px;" aria-hidden="true"></i>
+			</a>
+			<a href="{{vm.data.drive_url}}" ng-hide="!(vm.data.drive_url)" title="Google Drive">
+			<i class="fa fa-google social-icon" style="margin-left: 10px;" aria-hidden="true"></i>
+			</a>
+			<a href="{{vm.data.youtube_url}}" ng-hide="!(vm.data.youtube_url)" title="Youtube">
+			<i class="fa fa-youtube social-icon" style="margin-left: 10px;" aria-hidden="true"></i>
+			</a>
+			<a href="{{vm.data.mingle_url}}" ng-hide="!(vm.data.mingle_url)" title="Mingle">
+			<i class="fa fa-medium social-icon" style="margin-left: 10px;" aria-hidden="true"></i>
+			</a>
+			<a href="{{vm.data.archive_url}}" ng-hide="!(vm.data.archive_url)" title="Previous Semester's Project">
+			<i class="fa fa-hourglass social-icon" style="margin-left: 10px;" aria-hidden="true"></i>
+			</a>
+             <hr>
+                <h4>Project Owners</h4>
+                <div>
+                    <ul class="student-list" ng-repeat="projowners in vm.productOwner">
+                    <li class="student-in-list">
+                            <a ng-click="vm.redirect2(projowners[1])" class="person_hover">{{projowners[0]}}</a>
+                            <a href="/#/sendmessage/{{projowners[1]}}/0/1">
+                           <i ng-if="vm.data.owner != null" class="fa fa-envelope-o" ng-show="vm.profile.userType == 'Pi/CoPi' || vm.profile.userType == 'Staff/Faculty'" aria-hidden="true" style="font-size: 20px; float: right;"></i>
+                           <p ng-if="vm.data.owner == null" style="float: right;"></p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                    <h4>Faculty</h4>
+                <div>
+					<ul class="student-list" ng-repeat="faculty in vm.data.faculty track by $index">
+					<li class="student-in-list">
+                    <a ng-click="vm.redirect2(faculty.email)" class="person_hover">{{faculty.name}}</a>
+					<a href="/#/sendmessage/{{faculty.email}}/0/1">
+					<i class="fa fa-envelope-o" ng-show=" vm.profile.userType == 'Pi/CoPi' || vm.profile.userType == 'Staff/Faculty'" aria-hidden="true" style="font-size: 20px; float: right;"></i>
+					</a>
+                    </li>
+					</ul>
+                </div>
+                    <h4>Mentor</h4>
+				<div>
+					<ul class="student-list" ng-repeat="mentor in vm.data.mentor track by $index">
+					<li class="student-in-list">
+                    <a ng-click="vm.redirect2(mentor.email)" class="person_hover">{{mentor.name}}</a>
+					<a href="/#/sendmessage/{{mentor.email}}/0/1">
+					<i class="fa fa-envelope-o" ng-show=" vm.profile.userType == 'Pi/CoPi' || vm.profile.userType == 'Staff/Faculty'" aria-hidden="true" style="font-size: 20px; float: right;"></i>
+					</a>
+                    </li>
+					</ul>
+                </div>
+                    <h4>Students</h4>
+                <div>
+					<ul class="student-list" ng-repeat="student in vm.data.addedStudents track by $index">
+                        <li class="student-in-list">
+                        <a ng-click="vm.redirect2(student.email)" class="person_hover">{{student.name}}</a>
+                        <a href="/#/sendmessage/{{student.email}}/0/1">
+                        <i class="fa fa-envelope-o" ng-show=" vm.profile.userType == 'Pi/CoPi' || vm.profile.userType == 'Staff/Faculty'" aria-hidden="true" style="font-size: 20px; float: right;"></i>
+                        </a>
+                        </li>
+                    </ul>
+					<ul class="student-list" ng-repeat="student in vm.data.members_detailed track by $index">
+                        <li class="student-in-list">
+                        <a ng-click="vm.redirect($index)" class="person_hover">{{student}}</a>
+                        <a href="/#/sendmessage/{{vm.getEmail($index)}}/0/1">
+                        <i class="fa fa-envelope-o" ng-show=" vm.profile.userType == 'Pi/CoPi' || vm.profile.userType == 'Staff/Faculty'" aria-hidden="true" style="font-size: 20px; float: right;"></i>
+                        </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="sidebar-bottom-wrap">
+
+             <div class="col-sm-12">
+             <hr>
+                    <h4>Options</h4>
+            </div>
+
+            <!-- <div class="col-sm-12" ng-repeat="discipline in vm.data.disciplines">
+                <div class="btn side-bar-button">{{discipline}}</div>
+            </div> -->
+
+            <div class="btn btn-primary" ng-click="vm.applyForProject()" ng-hide=" vm.profile.userType == 'Pi/CoPi' || vm.profile.userType == 'Staff/Faculty'" ng-if="!vm.already_joined"> 
+                <strong>Apply</strong>
+            </div>
+
+            <div class="btn btn-primary" ng-click="vm.applyForProject()" ng-show=" vm.profile.userType == 'Pi/CoPi' || vm.profile.userType == 'Staff/Faculty'" ng-if="!vm.already_joined"> 
+                <strong>Join</strong>
+            </div>
+
+            <div ng-if="vm.already_joined" class="btn btn-primary" ng-click="vm.leaveProject()"> 
+                <strong>Leave</strong>
+            </div>
+
+            <div class="btn btn-primary" ng-click="vm.editProject()" ng-show=" vm.profile.userType == 'Pi/CoPi' || vm.profile.userType == 'Staff/Faculty'"> 
+                <strong>Edit</strong>
+            </div>
+
+            <div class="btn btn-primary" ng-click="vm.deleteProject()" ng-show=" vm.profile.userType == 'Pi/CoPi' || vm.profile.userType == 'Staff/Faculty'"> 
+                <strong>Delete</strong>
+            </div>
+            </div>
+        </div>
+</div>

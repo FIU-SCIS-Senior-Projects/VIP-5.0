@@ -1,0 +1,134 @@
+<div class=register>
+    <h3 align="center"> Registration </h3>
+    <form ng-submit="regCtlr.saveUser()">
+        <div class="form-group">
+            <table class="table">
+                <tr>
+                    <td>
+
+                        <!-- User Story #1175 -->
+                        <input class="form-control" placeholder="*First Name" type="text"
+                               ng-model="regCtlr.userData.firstName" required>
+
+                    </td>
+                    <td><!-- User Story #1175 -->
+                        <input class="form-control" placeholder="*Last Name" type="text"
+                               ng-model="regCtlr.userData.lastName" required></input>
+                    </td>
+                </tr>
+              <tr><!-- User Story #1175 -->
+                    <td colspan="4"><input class="form-control" placeholder="*Email" type="text"
+                                           ng-model="regCtlr.userData.email" required></input></td>
+                </tr>
+
+                <tr><!-- User Story #1175 -->
+                    <td colspan="4"><input class="form-control" placeholder="*Password" type="password"
+                                           ng-model="regCtlr.userData.password" required ></input>
+                                            <div class="alert alert-info">
+                                                <p>
+                                                    <b>Please Note:</b> Password must have at least 8 characters and include:
+                                                    <br><br>                  
+                                                    i) at least one upper case letter (A – Z).
+                                                    <br>
+                                                    ii) at least one lower case letter(a-z).
+                                                    <br>
+                                                    iii) At least one digit (0 – 9) .
+                                                    <br>
+                                                    iv) at least one special Characters of !@#$%&*()
+                                                    <br>
+                                                </p>
+                                            </div>
+                                           
+                                           </td>
+                </tr>
+                <tr><!-- User Story #1175 -->
+                    <td colspan="4"><input class="form-control" placeholder="*Confirm Password" type="password"
+                                           ng-model="regCtlr.userData.passwordConf" required></input></td>
+                </tr>
+                <tr>
+                    <td><!-- User Story #1175 -->
+                        <label>*User Type:</label>
+                        <div>
+                            <select ng-change="regCtlr.onchange(regCtlr.userData.userType.name)"  class = 'form-control'  ng-model="regCtlr.userData.userType" ng-options="user as user.name for user in regCtlr.Users" required><option></option>
+                            </select>
+                        </div><br>
+
+                    </td>
+                    <td><!-- User Story #1175 -->
+                        <label>*Rank:</label>
+                        <div>
+                            <select class = "form-control" ng-model="regCtlr.userData.rank" ng-options="rank for rank in regCtlr.userData.userType.ranks" required><option></option>
+                            </select>
+                        </div>
+                </tr>
+                <tr>
+                    <td><!-- User Story #1175 -->
+                        <label>*Panther ID:</label>
+
+                        <div>
+                            <input class = "form-control" placeholder = "123456" type="text" ng-model="regCtlr.userData.pantherID" required />
+                        </div>
+
+                    </td>
+                    <td>
+                        <!-- User Story #1175 -->
+                        <label>*Gender:</label>
+                    <div>
+                        <select  class = "form-control"ng-model="regCtlr.userData.gender" required >
+                            <option></option>
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+                        </select>
+                    </div>
+                </td>
+
+                <tr>
+                    <td colspan="4">
+                            <!-- User Story #1175 -->
+                            <label>*College:</label>
+                            <select class = 'form-control' ng-model="regCtlr.userData.college" ng-options="college as college.name for college in regCtlr.Colleges" required ><option></option>
+                            </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <!-- User Story #1175 -->
+                        <label>School/Department:</label>
+                        <select class = 'form-control' ng-model="regCtlr.userData.department" ng-options=" school for school in regCtlr.userData.college.schools"><option></option>
+                        </select>
+
+                    </td>
+                </tr>
+
+            </table>
+            <!-- User Story #1175 -->
+            <h4><strong>* : required fields</strong></h4>
+            <br>
+            <div align="center">
+                <button style= "width: 150px;" type="submit" class="btn btn-primary btn-block">
+                    <!-- User Story #1140 -->    <i class="fa fa-lg fa-user-plus"></i> Create Account
+                </button>
+
+
+            <div style = "margin-left:53px;" class="row show-hide-message" ng-show="regCtlr.message">
+                <div style = "margin-left:53px;"class="col-sm-6 col-sm-offset-4">
+
+                    <div style = "margin-left:53px;" class="alert alert-info">
+                        {{ regCtlr.message }}
+                    </div>
+
+                </div>
+            </div>
+                  </div><br>
+            <div>
+                <a ui-sref ="login" class="pull-right">Already have an account?</a><br>
+                <!--  <a href="#" class="pull-left">Forgotten your password?</a> -->
+            </div>
+
+
+        </div>
+
+    </form>
+
+
+</div>
